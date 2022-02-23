@@ -1,3 +1,5 @@
+## Deliverable 1
+
 ## Use Library FUnction to Load dplyr package
 library(dplyr)
 
@@ -9,3 +11,30 @@ lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AW
 
 ## Summary Function
 summary(lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data = MechaCar_mpg))
+
+## Deliverable 2
+
+## Import and Read csv as dataframe
+suspension_coil <- read.csv(file='Suspension_Coil.csv')
+
+## Create a total_summary dataframe using summarize()
+total_summary <- suspension_coil %>% summarize(Mean_PSI = mean(PSI), Median_PSI = median(PSI), Var_PSI = var(PSI), Std_Dev_PSI = sd(PSI),) 
+
+## Create a lot_summary using group_by() and summarize()
+lot_summary <- suspension_coil  %>% group_by(Manufacturing_Lot) %>% summarize(Mean_PSI = mean(PSI), Median_PSI = median(PSI), Var_PSI = var(PSI), Std_Dev_PSI = sd(PSI),)
+
+## Deliverable 3
+
+## Write a t-test to determine PSI across all mnufacturing lots
+t.test(suspension_coil$PSI, mu = 1500)
+
+## Assign lot1, 2 and 3 variables for t-test
+lot1 <- subset(suspension_coil, Manufacturing_Lot == "Lot1")
+lot2 <- subset(suspension_coil, Manufacturing_Lot == "Lot2")
+lot3 <- subset(suspension_coil, Manufacturing_Lot == "Lot3")
+
+## Execute t-test on lots
+t.test(lot1$PSI, mu = 1500)
+t.test(lot2$PSI, mu = 1500)
+t.test(lot3$PSI, mu = 1500)
+
